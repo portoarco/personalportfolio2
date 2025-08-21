@@ -9,7 +9,13 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { ChevronDown, ExternalLink, Github } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  ChevronDown,
+  ExternalLink,
+  Github,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -268,6 +274,13 @@ export default function Portfolio() {
           <CarouselPrevious className="max-md:hidden" />
           <CarouselNext className="max-md:hidden" />
         </Carousel>
+      </div>
+      {/* Scrollable */}
+      <div className=" md:hidden mt-5 text-xs text-center md:text-start md:text-xl text-gray-200  leading-relaxed">
+        <div className="flex items-center justify-center gap-x-5">
+          <ArrowLeft className="size-5" />
+          Scrollable Area <ArrowRight className="size-5" />
+        </div>
       </div>
     </section>
   );

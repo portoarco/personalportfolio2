@@ -130,7 +130,7 @@ body {
     scroll-behavior: smooth;
   }
   html {
-    scroll-padding-top: 50px;
+    scroll-padding-top: 80px;
   }
 }
 

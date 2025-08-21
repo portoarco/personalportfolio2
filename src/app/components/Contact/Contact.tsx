@@ -15,6 +15,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
+import FormErrorMessage from "../AnimatedFormErrorMessage";
 
 const formSchema = z.object({
   first_name: z
@@ -43,7 +44,21 @@ export default function Contact() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    const phonenumber = "6285602907659";
+    const first_name = values.first_name.toUpperCase();
+    const last_name = values.last_name?.toUpperCase();
+    const email = values.email;
+    const phone = values.phonenumber;
+    const subject = values.interestedSubject;
+    const inMessage = values.message;
+    const messageContent = `Hello! My name is ${first_name} ${last_name}. I want to ask about ${subject} subject. ${inMessage}`;
+
+    const encodedMessage = encodeURIComponent(messageContent);
+    const waUrl = `https://wa.me/${phonenumber}?text=${encodedMessage}`;
+    // redirect to whatsapp
+    window.open(waUrl);
+    // clear form
+    form.reset();
   }
 
   return (
@@ -58,7 +73,7 @@ export default function Contact() {
       {/* Form */}
       <Form {...form}>
         <form
-          className="space-y-4 p-7 md:px-15 md:py-10 flex items-center  rounded-xl mt-10 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20 shadow-xl shadow-cyan-500/50"
+          className="space-y-4 p-7 md:h-150 md:px-15 md:py-10 flex items-center  rounded-xl mt-10 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20 shadow-xl shadow-cyan-500/50"
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <div id="contact-picture" className="max-lg:hidden lg:mr-10">
@@ -85,14 +100,33 @@ export default function Contact() {
                       </FormLabel>
                       <FormControl>
                         <Input
+                          {...form.register("first_name", {
+                            onChange: (e) => {
+                              const upperValue = e.target.value.toUpperCase();
+                              form.setValue("first_name", upperValue);
+                            },
+                          })}
                           className="p-5 rounded-lg text-sm  bg-white"
                           placeholder="Enter first name"
                           {...field}
                         />
                       </FormControl>
-                      <AnimatePresence>
+                      {/* <AnimatePresence>
                         <FormMessage className="transition-transform duration-500 ease-in-out" />
-                      </AnimatePresence>
+                      </AnimatePresence> */}
+                      {/* {form.formState.errors.first_name && (
+                        <AnimatePresence>
+                          <motion.p
+                            className="text-sm text-destructive text-nowrap"
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                          >
+                            {form.formState.errors.first_name.message}
+                          </motion.p>
+                        </AnimatePresence>
+                      )} */}
+                      <FormErrorMessage></FormErrorMessage>
                     </FormItem>
                   )}
                 />
@@ -108,6 +142,12 @@ export default function Contact() {
                       <FormLabel className="md:text-xl">Last Name</FormLabel>
                       <FormControl>
                         <Input
+                          {...form.register("last_name", {
+                            onChange: (e) => {
+                              const upperValue = e.target.value.toUpperCase();
+                              form.setValue("last_name", upperValue);
+                            },
+                          })}
                           className="p-5 rounded-lg text-sm  bg-white"
                           placeholder="Enter last name"
                           {...field}
@@ -139,7 +179,8 @@ export default function Contact() {
                           {...field}
                         />
                       </FormControl>
-                      <FormMessage />
+                      {/* <FormMessage /> */}
+                      <FormErrorMessage />
                     </FormItem>
                   )}
                 />
@@ -161,7 +202,8 @@ export default function Contact() {
                           {...field}
                         />
                       </FormControl>
-                      <FormMessage />
+                      {/* <FormMessage /> */}
+                      <FormErrorMessage />
                     </FormItem>
                   )}
                 />
@@ -182,9 +224,16 @@ export default function Contact() {
                       className="p-5 rounded-lg text-sm  bg-white"
                       placeholder="e.g. Website Development"
                       {...field}
+                      {...form.register("interestedSubject", {
+                        onChange: (e) => {
+                          const upperValue = e.target.value.toUpperCase();
+                          form.setValue("interestedSubject", upperValue);
+                        },
+                      })}
                     />
                   </FormControl>
-                  <FormMessage />
+                  {/* <FormMessage /> */}
+                  <FormErrorMessage />
                 </FormItem>
               )}
             />
@@ -205,7 +254,8 @@ export default function Contact() {
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage />
+                  {/* <FormMessage /> */}
+                  <FormErrorMessage />
                 </FormItem>
               )}
             />

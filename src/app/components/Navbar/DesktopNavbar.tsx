@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { toast } from "react-toastify";
+import { animate, motion } from "motion/react";
 interface IDesktopNavbar {
   className?: string;
 }
@@ -32,9 +33,9 @@ export default function DekstopNavbar({ className }: IDesktopNavbar) {
           <Link href="/">
             <li>Home</li>
           </Link>
-          <li>
+          <motion.li>
             <Link href="#about">About</Link>
-          </li>
+          </motion.li>
           <li>
             <Link href="#portfolio">Portfolio</Link>
           </li>
@@ -44,9 +45,14 @@ export default function DekstopNavbar({ className }: IDesktopNavbar) {
         </ul>
         <div id="cta">
           <Link href="#contactme">
-            <Button className="rounded-md p-6 text-lg 2xl:text-xl   3xl:p-4 bg-[#f3297d] hover:bg-[#f31370] cursor-pointer">
-              Let's Talk
-            </Button>
+            <motion.div
+              whileTap={{ scale: 1.2, rotate: 10 }}
+              whileHover={{ scale: 1.1 }}
+            >
+              <Button className="rounded-md p-6 text-lg 2xl:text-xl   3xl:p-4 bg-[#f3297d] hover:bg-[#f31370] cursor-pointer">
+                Let's Talk
+              </Button>
+            </motion.div>
           </Link>
         </div>
       </div>

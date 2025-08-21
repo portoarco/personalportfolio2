@@ -1,9 +1,11 @@
+"use client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Download } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import MobileCTA from "../MobileCTA";
+import { motion } from "motion/react";
 
 export default function Header() {
   return (
@@ -24,9 +26,14 @@ export default function Header() {
             <div className="w-35 md:w-50 h-1 mt-2  bg-orange-500"></div>
           </div>
           <div className="mt-5 flex max-md:items-center max-md:justify-center">
-            <span className=" text-xl max-md:text-center lg:text-4xl bg-gradient-to-r from-red-500 to-orange-500 font-bold px-1 xl:px-5 py-3">
+            <motion.span
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ ease: "easeInOut", duration: 0.3 }}
+              className=" text-xl max-md:text-center lg:text-4xl bg-gradient-to-r from-red-500 to-orange-500 font-bold px-1 xl:px-5 py-3 "
+            >
               Fullstack Web Developer
-            </span>
+            </motion.span>
           </div>
           <p className="max-md:text-center text-xs lg:text-lg text-gray-200 lg:text-md">
             I'm Fullstack Web Developer Based in Indonesia. Specialized in
@@ -36,12 +43,18 @@ export default function Header() {
         </div>
 
         <div className="flex items-center flex-col md:flex-row md:gap-x-5 max-md:justify-center gap-y-8 max-md:items-center mt-10 ">
-          <div className=" bg-[#f3297d] hover:bg-[#f31370] hover:scale-105 transition-all duration-300 ease-in-out  w-35 h-9 rounded-md relative hover:shadow-gray-100 cursor-pointer ">
-            <Button className=" absolute  bg-gray-100 hover:bg-white rounded-none rounded-tl-md rounded-bl-md text-black font-semibold cursor-pointer">
-              View CV
-            </Button>
-            <Download className="text-white absolute top-2 right-3 size-5 cursor-pointer" />
-          </div>
+          <motion.div
+            className=" bg-[#f3297d] hover:bg-[#f31370]   w-35 h-12 rounded-md relative hover:shadow-gray-100 cursor-pointer "
+            whileTap={{ scale: 1.2 }}
+            whileHover={{ scale: 0.9 }}
+          >
+            <a href="/cv/arco.pdf" download>
+              <Button className=" absolute  bg-gray-100 hover:bg-white rounded-none rounded-tl-md rounded-bl-md text-black text-md font-semibold cursor-pointer w-23 h-12">
+                View CV
+              </Button>
+              <Download className="text-white absolute top-2 right-3 size-7 cursor-pointer" />
+            </a>
+          </motion.div>
           <div className="flex gap-x-2  ">
             <Link href="https://github.com/portoarco" target="blank">
               <Avatar className="bg-white p-1 rounded-md size-10 cursor-pointer">
@@ -59,14 +72,6 @@ export default function Header() {
             <Link href="https://id.linkedin.com/in/arcoanggoro" target="blank">
               <Avatar className="bg-white p-1 rounded-md size-10 cursor-pointer">
                 <AvatarImage src="/sosmed/linkedin.svg"></AvatarImage>
-              </Avatar>
-            </Link>
-            <Link
-              href="https://api.whatsapp.com/send?phone=6285602907659"
-              target="blank"
-            >
-              <Avatar className="bg-white p-1 rounded-md size-10 cursor-pointer">
-                <AvatarImage src="/sosmed/wa.svg"></AvatarImage>
               </Avatar>
             </Link>
           </div>

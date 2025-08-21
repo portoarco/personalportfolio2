@@ -13,10 +13,29 @@ import Contact from "./components/Contact/Contact";
 import { ArrowUp, ArrowUpCircle } from "lucide-react";
 import Link from "next/link";
 import BtnScrollUp from "./components/BtnScrollUp";
+import { motion, useScroll } from "motion/react";
 
 export default function Home() {
+  const { scrollYProgress } = useScroll();
   return (
     <section className=" bg-[#12023f]">
+      {/* Scroll Indicator */}
+      <motion.div
+        id="scroll-indicator"
+        style={{
+          scaleX: scrollYProgress,
+          position: "fixed",
+          zIndex: 50,
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 5,
+          originX: 0,
+          // backgroundColor: "white",
+        }}
+        className="max-md:hidden bg-gradient-to-r from-amber-500 to-pink-500 "
+      />
+
       {/* Navbar */}
       <nav className=" ">
         <DekstopNavbar className="max-lg:hidden px-15 py-8"></DekstopNavbar>
@@ -25,7 +44,7 @@ export default function Home() {
 
       <header id="header" className="p-7 lg:p-10 bg-[#12023f] ">
         {/* Header Section */}
-        <div className="">
+        <div className="max-lg:mt-20">
           <Header></Header>
         </div>
       </header>
